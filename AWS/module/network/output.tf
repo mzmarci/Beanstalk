@@ -1,5 +1,5 @@
 
-output "public_subnets_id" {
+output "public_subnet_id" {
   description = "List of public subnet IDs"
   value       = aws_subnet.public_subnet[*].id
 }
@@ -13,7 +13,7 @@ output "public_subnet_azs" {
 }
 
 
-output "private_subnets_id" {
+output "private_subnet_id" {
   description = "List of private subnet IDs"
   value       = aws_subnet.private_subnet[*].id
 }

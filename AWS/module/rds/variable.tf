@@ -9,8 +9,4 @@ variable "vpc_security_group_ids" {}
 variable "subnet_ids" {}
 variable "multi_az" {}
 
-variable "db_username" {
-  description = "Master username for RDS"
-  type        = string
-  default     = "phsadmin"  # ✅ Valid (starts with a letter, no special characters)
-}
+variable "db_username" {}

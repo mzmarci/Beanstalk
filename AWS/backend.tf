@@ -7,11 +7,11 @@ terraform {
     }
   }
 
-  backend "s3" {
-    bucket = "workspacebucket-2023"
-    key    = "Dev/terraform.tfstate"
-    region = "eu-west-1"
-  }
+  # backend "s3" {
+  #   bucket = "workspacebucket-2023"
+  #   key    = "Dev/terraform.tfstate"
+  #   region = "eu-west-1"
+  # }
 
   required_version = ">=1.2.0"
 }

@@ -66,7 +66,7 @@ resource "aws_eip" "nat" {
 resource "aws_nat_gateway" "nat_gateway" {
   count         = length(var.public_subnet_cidrs)
   allocation_id = aws_eip.nat[count.index].id
-  subnet_id     = aws_subnet.public_subnets[count.index].id
+  subnet_id     = aws_subnet.public_subnet[count.index].id
 
   tags = {
     Name = "NAT Gateway ${count.index + 1}"
@@ -76,7 +76,7 @@ resource "aws_nat_gateway" "nat_gateway" {
 # Private subnets
 resource "aws_subnet" "private_subnet" {
   count             = length(var.private_subnet_cidrs)
-  vpc_id            = aws_vpc.stock_vpc.id
+  vpc_id            = aws_vpc.elb_vpc.id
   cidr_block        = element(var.private_subnet_cidrs, count.index)
   availability_zone = element(data.aws_availability_zones.available_zones.names, count.index)
   map_public_ip_on_launch = false
@@ -88,7 +88,7 @@ resource "aws_subnet" "private_subnet" {
 
 resource "aws_route_table" "private_route_table" {
   count = length(var.private_subnet_cidrs)
-  vpc_id = aws_vpc.stock_vpc.id
+  vpc_id = aws_vpc.elb_vpc.id
 
   tags = {
     Name = "Private Route Table ${count.index + 1}"

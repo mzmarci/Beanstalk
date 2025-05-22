@@ -37,6 +37,9 @@ resource "aws_s3_bucket_lifecycle_configuration" "upload-bucket" {
     id     = "log"
     status = "Enabled"
 
+  filter {
+    prefix = ""
+  }
     transition {
       days          = 30
       storage_class = "STANDARD_IA"
@@ -59,6 +62,10 @@ resource "aws_s3_bucket_lifecycle_configuration" "upload-deployment" {
   rule {
     id     = "log"
     status = "Enabled"
+
+  filter {
+    prefix = ""
+  }  
 
     transition {
       days          = 30
@@ -95,56 +102,6 @@ resource "aws_s3_bucket_versioning" "deployment" {
   bucket = aws_s3_bucket.bucket_deployment.id
   versioning_configuration {
     status = "Enabled"
-  }
-}
-
-resource "aws_s3_bucket_lifecycle_configuration" "versioning_bucket_config" {
-  bucket = aws_s3_bucket.versioning_bucket_upload.id
-
-  depends_on = [aws_s3_bucket_versioning.versioning]
-
-  rule {
-    id     = "log"
-    status = "Enabled"
-
-    transition {
-      days          = 30
-      storage_class = "STANDARD_IA"
-    }
-
-    transition {
-      days          = 60
-      storage_class = "GLACIER"
-    }
-
-    expiration {
-      days = 365
-    }
-  }
-}
-
-resource "aws_s3_bucket_lifecycle_configuration" "versioning_bucket_config_deployment" {
-  bucket = aws_s3_bucket.versioning_bucket_deployment.id
-
-  depends_on = [aws_s3_bucket_versioning.versioning]
-
-  rule {
-    id     = "log"
-    status = "Enabled"
-
-    transition {
-      days          = 30
-      storage_class = "STANDARD_IA"
-    }
-
-    transition {
-      days          = 60
-      storage_class = "GLACIER"
-    }
-
-    expiration {
-      days = 365
-    }
   }
 }
 

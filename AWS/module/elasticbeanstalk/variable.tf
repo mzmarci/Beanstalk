@@ -89,7 +89,7 @@ variable "instance_security_group_id" {
   type        = string
 }
 
-variable "alb_security_group_id" {
+variable "lb_security_group_id" {
   description = "ID of the security group for ALB"
   type        = string
 }
