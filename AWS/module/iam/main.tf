@@ -1,3 +1,5 @@
+
+# In this module IAM Policy is created for the ec2 instnaces and Service, also attachemnt policy was added
 resource "aws_iam_role" "beanstalk_service" {
   name = "${var.app_name}-eb-service-role"
 
@@ -41,6 +43,7 @@ resource "aws_iam_role_policy_attachment" "beanstalk_tier" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSElasticBeanstalkService"
 }
 
+# also make use of the web tier and not the work tier
 resource "aws_iam_role_policy_attachment" "beanstalk_ec2_web" {
   role       = aws_iam_role.beanstalk_ec2.name
   policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier"

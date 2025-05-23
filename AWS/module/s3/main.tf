@@ -1,3 +1,5 @@
+
+# we created two bucket because one bucket is for deployment which will be used for our application that is zipped, the other bucket will be for upload anything to the application.
 resource "aws_s3_bucket" "bucket_upload" {
   bucket        = var.bucket_name
   force_destroy = true
