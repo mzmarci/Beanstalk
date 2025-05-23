@@ -6,7 +6,8 @@ resource "aws_elastic_beanstalk_application" "app" {
 resource "aws_elastic_beanstalk_environment" "env" {
   name                = var.environment_name
   application         = aws_elastic_beanstalk_application.app.name
-  solution_stack_name = var.solution_stack_name
+  solution_stack_name = "64bit Amazon Linux 2023 v4.4.2 running Python 3.11"
+
   tier                = "WebServer"
 
   # Load Balancer Configuration
